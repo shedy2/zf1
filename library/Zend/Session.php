@@ -368,13 +368,14 @@ class Zend_Session extends Zend_Session_Abstract
         }
 
         $cookieParams = session_get_cookie_params();
-
+        session_write_close();
         session_set_cookie_params(
             $seconds,
             $cookieParams['path'],
             $cookieParams['domain'],
             $cookieParams['secure']
             );
+        session_start();
 
         // normally "rememberMe()" represents a security context change, so should use new session id
         self::regenerateId();
